@@ -30,7 +30,8 @@ async def list_all_sessions() -> list[str]:
     return list_sessions()
 
 
-@router.delete("/{session_id}", status_code=204)
-async def delete_session(session_id: str) -> None:
+@router.delete("/{session_id}")
+async def delete_session(session_id: str) -> dict:
     """Clears all history for a session."""
     clear_session(session_id)
+    return {"deleted": True, "session_id": session_id}
